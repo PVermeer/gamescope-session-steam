@@ -16,6 +16,7 @@ Summary: Gamescope session for steam
 Url: %{sourcerepo}
 
 BuildRequires: systemd-rpm-macros
+BuildRequires: git
 
 Requires: steam
 Requires: gamescope
