@@ -6,10 +6,10 @@
 %global author pvermeer
 %global source gamescope-session-steam
 %global sourcerepo https://github.com/PVermeer/gamescope-session-steam
-%global tag v0.0.0
+%global tag v0.0.1
 
 Name: gamescope-session-steam
-Version: 0.0.0
+Version: 0.0.1
 Release: 0%{?dist}
 License: GPL-3.0 license
 Summary: Gamescope session for steam
