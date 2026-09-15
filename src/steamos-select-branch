@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "Not applicable for this OS"
+exit 0

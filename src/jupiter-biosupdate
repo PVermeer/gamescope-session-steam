@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "No updates configured for this bios"
+exit 0

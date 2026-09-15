@@ -1,0 +1,44 @@
+// For format details, see https://aka.ms/devcontainer.json.
+{
+	"name": "Fedora",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"features": {
+		"ghcr.io/devcontainers/features/common-utils:2": {
+			"installZsh": "false",
+			"username": "vscode",
+			"userUid": "1000",
+			"userGid": "1000",
+			"upgradePackages": "false"
+		}
+	},
+	"runArgs": [
+		// "--privileged", // Unsecure but allows flatpak install
+		"--device=/dev/dri"
+		// "--network=host", // If network is slow in container
+		// "--device=/dev/fuse",
+	],
+	"containerEnv": {
+		"RUN_IN_VSCODE_DEVCONTAINER": "true",
+		"DISPLAY": "${localEnv:DISPLAY}"
+	},
+	"mounts": [],
+	// "postCreateCommand": "",
+	"postStartCommand": "sudo dnf update -y",
+	// "initializeCommand": "xhost +local:docker", // Allow x11 from docker
+	"remoteUser": "vscode",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"timonwong.shellcheck",
+				"lumirelle.shell-format-rev",
+				"esbenp.prettier-vscode",
+				"ms-azuretools.vscode-containers",
+				"RVSmartPorting.rpm-spec-ext",
+				"IronGeek.vscode-env",
+				"github.vscode-github-actions"
+			]
+		}
+	}
+}

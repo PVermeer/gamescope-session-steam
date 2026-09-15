@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Source configs
+system_config="/etc/environment.d/gamescope-session-steam.conf"
+user_config="${HOME}/.config/environment.d/gamescope-session-steam.conf"
+
+configs=(
+    "$system_config"
+    "$user_config"
+)
+for config in "${configs[@]}"; do
+    if [ -f "$config" ]; then
+        # shellcheck disable=SC1090
+        source "$config"
+    fi
+done
+
+HDR_OPTIONS=""
+if [ -n "$GAMESCOPE_HDR_NITS" ]; then
+    HDR_OPTIONS="--hdr-itm-sdr-nits $GAMESCOPE_HDR_NITS --hdr-sdr-content-nits $GAMESCOPE_HDR_NITS"
+fi
+
+OUTPUT_OPTIONS=""
+if [ -n "$OUTPUT_CONNECTOR" ]; then
+    OUTPUT_OPTIONS="--prefer-output $OUTPUT_CONNECTOR"
+fi
+
+# shellcheck disable=SC2086
+gamescope \
+    --mangoapp \
+    $OUTPUT_OPTIONS \
+    $HDR_OPTIONS \
+    --steam \
+    -- \
+    steam \
+    -steamos3 \
+    -steamdeck \
+    -steampal \
+    &
+
+gamescope_pid=$!
+
+sleep 5
+systemctl --user start gamescope-session.target
+
+wait "$gamescope_pid"
